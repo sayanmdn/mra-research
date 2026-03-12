@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
+import PaperCard from '@/components/PaperCard';
 
 interface BlogEntry {
   _id: string;
@@ -44,33 +45,7 @@ export default async function PapersPage() {
         ) : (
           <div className="flex flex-col gap-6">
             {papers.map((paper) => (
-              <Link
-                key={paper._id}
-                href={`/papers/${paper.slug}`}
-                className="block border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-900">{paper.title}</h2>
-                    {paper.description && (
-                      <p className="text-sm text-gray-500 mt-1">{paper.description}</p>
-                    )}
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {paper.tags.map((tag) => (
-                        <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-right shrink-0">
-                    {paper.author && <p className="text-sm text-gray-600">{paper.author}</p>}
-                    <p className="text-xs text-gray-400 mt-1">
-                      {new Date(paper.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <PaperCard key={paper._id} paper={paper} />
             ))}
           </div>
         )}
