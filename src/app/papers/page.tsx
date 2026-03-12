@@ -1,7 +1,21 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import PaperCard from '@/components/PaperCard';
+
+export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Research Papers',
+  description: 'Browse all research papers and articles published by MRA Research.',
+  openGraph: {
+    title: 'Research Papers | MRA Research',
+    description: 'Browse all research papers and articles published by MRA Research.',
+    url: 'https://www.mraresearch.org/papers',
+    type: 'website',
+  },
+};
 
 interface BlogEntry {
   _id: string;

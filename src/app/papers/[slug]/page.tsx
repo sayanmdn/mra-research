@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import type { Metadata } from 'next';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
+
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 interface BlogEntry {
   _id: string;
@@ -13,6 +17,37 @@ interface BlogEntry {
   tags: string[];
   author: string;
   createdAt: string;
+}
+
+export async function generateStaticParams() {
+  await connectDB();
+  const papers = await Blog.find({}, { slug: 1 }).lean();
+  return papers.map((p: any) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const paper = await getPaper(slug);
+  if (!paper) return { title: 'Paper Not Found' };
+  return {
+    title: paper.title,
+    description: paper.description || `Read "${paper.title}" on MRA Research.`,
+    openGraph: {
+      title: paper.title,
+      description: paper.description || `Read "${paper.title}" on MRA Research.`,
+      type: 'article',
+      publishedTime: paper.createdAt,
+      authors: paper.author ? [paper.author] : undefined,
+      url: `https://www.mraresearch.org/papers/${paper.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: paper.title,
+      description: paper.description || undefined,
+    },
+  };
 }
 
 async function getPaper(slug: string): Promise<BlogEntry | null> {
@@ -48,6 +83,22 @@ export default async function PaperPage({ params }: { params: Promise<{ slug: st
         </div>
       </nav>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ScholarlyArticle',
+            headline: paper.title,
+            description: paper.description || undefined,
+            author: paper.author ? { '@type': 'Person', name: paper.author } : undefined,
+            datePublished: paper.createdAt,
+            publisher: { '@type': 'Organization', name: 'MRA Research', url: 'https://www.mraresearch.org' },
+            url: `https://www.mraresearch.org/papers/${paper.slug}`,
+            keywords: paper.tags.join(', ') || undefined,
+          }),
+        }}
+      />
       <article className="max-w-3xl mx-auto px-6 pt-12 pb-24">
         <Link href="/papers" className="text-sm text-gray-400 hover:text-gray-600 mb-6 inline-block">
           ← Back to Papers
