@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import connectDB from '@/lib/mongodb';
+import Blog from '@/models/Blog';
 
-interface Blog {
+interface BlogEntry {
   _id: string;
   title: string;
   slug: string;
@@ -10,16 +12,10 @@ interface Blog {
   createdAt: string;
 }
 
-async function getPapers(): Promise<Blog[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/papers`, {
-      cache: 'no-store',
-    });
-    const json = await res.json();
-    return json.data || [];
-  } catch {
-    return [];
-  }
+async function getPapers(): Promise<BlogEntry[]> {
+  await connectDB();
+  const blogs = await Blog.find({}, { content: 0 }).sort({ createdAt: -1 }).lean();
+  return JSON.parse(JSON.stringify(blogs));
 }
 
 export default async function PapersPage() {
@@ -40,7 +36,7 @@ export default async function PapersPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Research Papers</h1>
         <p className="text-gray-500 mb-10">Browse all published papers and research articles.</p>
 
-        {papers.length === 0 ? (
+        {(papers as BlogEntry[]).length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <p className="text-lg">No papers published yet.</p>
             <p className="text-sm mt-2">Use the API to upload your first paper.</p>

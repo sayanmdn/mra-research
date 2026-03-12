@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import connectDB from '@/lib/mongodb';
+import Blog from '@/models/Blog';
 
-interface Blog {
+interface BlogEntry {
   _id: string;
   title: string;
   slug: string;
@@ -13,23 +15,16 @@ interface Blog {
   createdAt: string;
 }
 
-async function getPaper(slug: string): Promise<Blog | null> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/papers/${slug}`,
-      { cache: 'no-store' }
-    );
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.data || null;
-  } catch {
-    return null;
-  }
+async function getPaper(slug: string): Promise<BlogEntry | null> {
+  await connectDB();
+  const blog = await Blog.findOne({ slug }).lean();
+  if (!blog) return null;
+  return JSON.parse(JSON.stringify(blog));
 }
 
 export default async function PaperPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const paper = await getPaper(slug);
+  const paper = await getPaper(slug) as BlogEntry | null;
 
   if (!paper) {
     return (
