@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import type { Metadata } from 'next';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
+import NavBar from '@/components/NavBar';
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -63,26 +64,22 @@ export default async function PaperPage({ params }: { params: Promise<{ slug: st
 
   if (!paper) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Paper not found</h1>
-          <Link href="/papers" className="text-blue-600 hover:underline">Back to papers</Link>
-        </div>
-      </main>
+      <>
+        <NavBar />
+        <main className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Paper not found</h1>
+            <Link href="/papers" className="text-blue-600 hover:underline">Back to papers</Link>
+          </div>
+        </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Nav */}
-      <nav className="border-b border-gray-200 px-6 py-4 flex items-center justify-between max-w-6xl mx-auto">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">MRA Research</Link>
-        <div className="flex gap-6 text-sm font-medium text-gray-600">
-          <Link href="/" className="hover:text-gray-900">Home</Link>
-          <Link href="/papers" className="hover:text-gray-900">Papers</Link>
-        </div>
-      </nav>
-
+    <>
+      <NavBar />
+      <main className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -120,6 +117,7 @@ export default async function PaperPage({ params }: { params: Promise<{ slug: st
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{paper.content}</ReactMarkdown>
         </div>
       </article>
-    </main>
+      </main>
+    </>
   );
 }

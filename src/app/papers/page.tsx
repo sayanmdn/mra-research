@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import PaperCard from '@/components/PaperCard';
+import NavBar from '@/components/NavBar';
 
 export const revalidate = 60;
 
@@ -37,17 +38,10 @@ export default async function PapersPage() {
   const papers = await getPapers();
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Nav */}
-      <nav className="border-b border-gray-200 px-6 py-4 flex items-center justify-between max-w-6xl mx-auto">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">MRA Research</Link>
-        <div className="flex gap-6 text-sm font-medium text-gray-600">
-          <Link href="/" className="hover:text-gray-900">Home</Link>
-          <Link href="/papers" className="hover:text-gray-900">Papers</Link>
-        </div>
-      </nav>
-
-      <section className="max-w-4xl mx-auto px-6 pt-16 pb-24">
+    <>
+      <NavBar />
+      <main className="min-h-screen bg-white">
+      <section className="max-w-4xl mx-auto px-6 pt-12 pb-24">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Research Papers</h1>
         <p className="text-gray-500 mb-10">Browse all published papers and research articles.</p>
 
@@ -64,6 +58,7 @@ export default async function PapersPage() {
           </div>
         )}
       </section>
-    </main>
+      </main>
+    </>
   );
 }

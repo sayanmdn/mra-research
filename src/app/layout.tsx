@@ -8,12 +8,13 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mraresearch.org'),
   title: {
-    default: 'MRA Research',
-    template: '%s | MRA Research',
+    default: 'MRA Research LLC — Autonomous Systems & Aerospace R&D',
+    template: '%s | MRA Research LLC',
   },
-  description: 'MRA Research publishes cutting-edge research papers and findings across disciplines.',
+  description:
+    'MRA Research LLC is a US-based scientific R&D firm specializing in autonomous UAV systems, artificial intelligence, IoT, and aerospace engineering. We publish open-access research and develop technology for defense and commercial applications.',
   openGraph: {
-    siteName: 'MRA Research',
+    siteName: 'MRA Research LLC',
     type: 'website',
     locale: 'en_US',
   },
