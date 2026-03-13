@@ -215,7 +215,7 @@ export default function Home() {
             <div className="flex-1 max-w-xl md:max-w-none md:w-1/2">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-[#3B82F6] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 border border-blue-100">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] inline-block" />
-                Scientific R&amp;D · New Mexico, USA
+                Scientific R&amp;D · Delaware, USA
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-[#1B2A4A] leading-[1.08] tracking-tight mb-6">
@@ -295,7 +295,7 @@ export default function Home() {
               </h2>
               <p className="text-base md:text-lg text-gray-500 leading-relaxed">
                 MRA Research LLC is a scientific research and development firm incorporated in
-                New Mexico, USA. We focus on advancing autonomous systems, AI-driven engineering,
+                Delaware, USA. We focus on advancing autonomous systems, AI-driven engineering,
                 and next-generation aerospace technologies. Our work spans peer-reviewed
                 publications, prototype development, and applied R&amp;D for defense and
                 commercial sectors.
@@ -303,7 +303,7 @@ export default function Home() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
                 {[
-                  { label: 'Incorporated', value: 'New Mexico, USA' },
+                  { label: 'Incorporated', value: 'Delaware, USA' },
                   { label: 'Focus',        value: 'Defense & Commercial R&D' },
                   { label: 'Output',       value: 'Open-Access Publications' },
                 ].map((item) => (
