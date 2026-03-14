@@ -17,6 +17,7 @@ export default function NavBar() {
           <Link href="/"         className="hover:text-[#1B2A4A] transition-colors">Home</Link>
           <Link href="/#about"   className="hover:text-[#1B2A4A] transition-colors">About</Link>
           <Link href="/#research" className="hover:text-[#1B2A4A] transition-colors">Research Areas</Link>
+          <Link href="/#services" className="hover:text-[#1B2A4A] transition-colors">Services</Link>
           <Link href="/papers"   className="hover:text-[#1B2A4A] transition-colors">Papers</Link>
           <Link
             href="/#contact"

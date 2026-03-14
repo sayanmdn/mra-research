@@ -66,6 +66,24 @@ const IconArrow = () => (
   </svg>
 );
 
+const IconCode = () => (
+  <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="10,10 4,16 10,22" />
+    <polyline points="22,10 28,16 22,22" />
+    <line x1="18" y1="8" x2="14" y2="24" />
+  </svg>
+);
+
+const IconChip = () => (
+  <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="10" y="10" width="12" height="12" rx="2" />
+    <line x1="14" y1="10" x2="14" y2="7" /><line x1="18" y1="10" x2="18" y2="7" />
+    <line x1="14" y1="22" x2="14" y2="25" /><line x1="18" y1="22" x2="18" y2="25" />
+    <line x1="10" y1="14" x2="7" y2="14" /><line x1="10" y1="18" x2="7" y2="18" />
+    <line x1="22" y1="14" x2="25" y2="14" /><line x1="22" y1="18" x2="25" y2="18" />
+  </svg>
+);
+
 // ── Drone Wireframe SVG ───────────────────────────────────────────────────
 
 const DroneWireframe = () => (
@@ -172,6 +190,33 @@ const researchAreas = [
     icon: <IconRocket />,
     title: 'Aerospace & Propulsion Research',
     desc: 'Jet engine design fundamentals, gasoline-electric hybrid propulsion for UAVs, aerodynamic optimization, and propulsion system integration.',
+  },
+];
+
+const services = [
+  {
+    icon: <IconCode />,
+    title: 'Software Consulting',
+    tagline: 'From firmware to full-stack autonomous systems software.',
+    bullets: [
+      'Embedded systems & firmware development',
+      'Autonomous navigation and flight control software',
+      'Edge AI / ML model integration and optimization',
+      'Real-time telemetry pipelines and data architectures',
+      'Custom simulation and testing frameworks',
+    ],
+  },
+  {
+    icon: <IconChip />,
+    title: 'Hardware Consulting',
+    tagline: 'End-to-end hardware design for field-deployed systems.',
+    bullets: [
+      'PCB design and embedded hardware prototyping',
+      'UAV airframe and propulsion system integration',
+      'Multi-sensor fusion hardware architectures',
+      'IoT node and mesh network hardware design',
+      'Hardware-in-the-loop (HIL) testing and validation',
+    ],
   },
 ];
 
@@ -305,7 +350,7 @@ export default function Home() {
                 {[
                   { label: 'Incorporated', value: 'Delaware, USA' },
                   { label: 'Focus',        value: 'Defense & Commercial R&D' },
-                  { label: 'Output',       value: 'Open-Access Publications' },
+                  { label: 'Services',     value: 'Software & Hardware Consulting' },
                 ].map((item) => (
                   <div key={item.label} className="border-l-2 border-[#3B82F6] pl-4">
                     <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-[0.12em] mb-1">
@@ -315,6 +360,43 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Services ──────────────────────────────────────────────────── */}
+        <section id="services" className="bg-[#F5F7FA] py-20">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="text-[#3B82F6] text-xs font-semibold uppercase tracking-[0.15em] mb-3">
+                Consulting
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1B2A4A]">What We Build For You</h2>
+              <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base leading-relaxed">
+                Beyond research, MRA Research offers hands-on consulting across software and hardware
+                — bringing our R&amp;D expertise directly to your engineering challenges.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {services.map((svc) => (
+                <div
+                  key={svc.title}
+                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <div className="text-[#1B2A4A] mb-4 opacity-75">{svc.icon}</div>
+                  <h3 className="text-lg font-bold text-[#1B2A4A] mb-1">{svc.title}</h3>
+                  <p className="text-sm text-gray-400 mb-5">{svc.tagline}</p>
+                  <ul className="space-y-2.5">
+                    {svc.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-2.5 text-sm text-gray-500">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#3B82F6] shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -388,6 +470,7 @@ export default function Home() {
                 <li><Link href="/"         className="hover:text-white transition-colors">Home</Link></li>
                 <li><Link href="#about"    className="hover:text-white transition-colors">About</Link></li>
                 <li><Link href="#research" className="hover:text-white transition-colors">Research</Link></li>
+                <li><Link href="#services" className="hover:text-white transition-colors">Services</Link></li>
                 <li><Link href="/papers"   className="hover:text-white transition-colors">Papers</Link></li>
                 <li><Link href="#contact"  className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
