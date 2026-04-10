@@ -221,10 +221,7 @@ export default function Home() {
 
             {/* Left: text */}
             <div className="flex-1 max-w-xl md:max-w-none md:w-1/2">
-              <div className="inline-flex items-center gap-2 bg-blue-50 text-[#3B82F6] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 border border-blue-100">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] inline-block" />
-                Technology Research &amp; Consulting · Delaware, USA
-              </div>
+              
 
               <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-[#1B2A4A] leading-[1.08] tracking-tight mb-6">
                 Research-Driven Engineering{' '}
