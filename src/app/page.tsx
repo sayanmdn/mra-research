@@ -143,6 +143,7 @@ const verticals = [
     icon: <IconScale />,
     title: 'Legal Technology',
     desc: 'Case management tools for litigants, property dispute tracking, and LLM-powered plain-language guidance — built for everyday users, not just law firms.',
+    link: { href: 'https://ecourt.mraresearch.org/', label: 'Try eCourt' },
   },
   {
     icon: <IconCode />,
@@ -275,13 +276,23 @@ export default function Home() {
               {verticals.map((v) => (
                 <div
                   key={v.title}
-                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
                 >
                   <div className="text-[#1B2A4A] mb-4 opacity-75">{v.icon}</div>
                   <h3 className="text-[0.9rem] font-semibold text-[#1B2A4A] mb-2 leading-snug">
                     {v.title}
                   </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{v.desc}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed flex-1">{v.desc}</p>
+                  {v.link && (
+                    <a
+                      href={v.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[#3B82F6] text-sm font-semibold hover:gap-2.5 transition-all mt-4"
+                    >
+                      {v.link.label} <IconArrow />
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
