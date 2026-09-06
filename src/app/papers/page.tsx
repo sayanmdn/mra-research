@@ -48,7 +48,9 @@ export default async function PapersPage() {
         {(papers as BlogEntry[]).length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <p className="text-lg">No papers published yet.</p>
-            <p className="text-sm mt-2">Use the API to upload your first paper.</p>
+            <p className="text-sm mt-2">
+              <Link href="/login" className="text-[#3B82F6] hover:underline">Sign in</Link> to publish the first one.
+            </p>
           </div>
         ) : (
           <div className="flex flex-col gap-6">

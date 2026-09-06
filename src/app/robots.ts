@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/api/',
+      disallow: ['/api/', '/login', '/admin'],
     },
     sitemap: 'https://www.mraresearch.org/sitemap.xml',
   };
