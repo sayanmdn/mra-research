@@ -252,7 +252,7 @@ export default function Home() {
             </div>
 
             {/* Right: network diagram */}
-            <div className="w-full md:w-1/2 max-w-md md:max-w-none flex items-center justify-center">
+            <div className="hidden md:flex w-full md:w-1/2 max-w-md md:max-w-none items-center justify-center">
               <NetworkDiagram />
             </div>
           </div>

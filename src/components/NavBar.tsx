@@ -9,6 +9,7 @@ const navLinks = [
   { href: '/#verticals', label: 'Verticals' },
   { href: '/#services',  label: 'Services' },
   { href: '/papers',     label: 'Papers' },
+  { href: '/login',      label: 'Login' },
 ];
 
 const IconMenu = () => (
